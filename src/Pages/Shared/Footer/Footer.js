@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
+import './Footer.css';
 
 const Footer = () => {
+          const [currentYear] = useState(new Date().getFullYear());
+
           return (
-                    <div>
-                              <h2>Copyrigth 2022 | Genius Car House | Abdul Ahad</h2>
+                    <div className='footer'>
+                              <h2>Copyright &copy; {currentYear} | Genius Car House | Abdul Ahad</h2>
                     </div>
           );
 };
