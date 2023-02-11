@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
 import auth from '../../../../firebase.init';
+import SocialLogin from '../SocialLogin/SocialLogin';
 import './Login.css'
 
 const Login = () => {
@@ -14,7 +15,6 @@ const Login = () => {
                     error,
           ] = useSignInWithEmailAndPassword(auth);
 
-          const [signInWithGoogle] = useSignInWithGoogle(auth);
 
           if (error) {
                     return (
@@ -53,13 +53,7 @@ const Login = () => {
                                         <button onClick={() => signInWithEmailAndPassword(email, password)} type="submit" className="form-submit">
                                                   Login
                                         </button>
-                                        <div className="form-or">Or Continue with</div>
-                                        <button onClick={()=>signInWithGoogle()} type="button" className="form-google">
-                                                  Google
-                                        </button>
-                                        <button type="button" className="form-facebook">
-                                                  Facebook
-                                        </button>
+                                        <SocialLogin></SocialLogin>
                                         <div className="form-register">
                                                   Don't have an account?{" "}
                                                   <Link to="/signUp" className="form-register-link">

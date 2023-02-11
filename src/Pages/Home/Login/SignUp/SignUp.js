@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../../../firebase.init';
+import SocialLogin from '../SocialLogin/SocialLogin';
 
 const SignUp = () => {
           const [email, setEmail] = useState('');
@@ -53,13 +54,7 @@ const SignUp = () => {
                                         <button onClick={() => createUserWithEmailAndPassword(email, password)} type="submit" className="form-submit">
                                                   Register
                                         </button>
-                                        <div className="form-or">or</div>
-                                        <button type="button" className="form-google">
-                                                  Continue with Google
-                                        </button>
-                                        <button type="button" className="form-facebook">
-                                                  Continue with Facebook
-                                        </button>
+                                        <SocialLogin></SocialLogin>
 
                               </form>
                     </div>
