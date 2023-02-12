@@ -2,8 +2,34 @@ import React from 'react';
 import googleLogo from '../../../../images/social-icon/google.png';
 import facebookLogo from '../../../../images/social-icon/facebook.png';
 import githubLogo from '../../../../images/social-icon/github.png';
+import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import auth from '../../../../firebase.init';
+import { useNavigate } from 'react-router-dom';
 
 const SocialLogin = () => {
+          const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+
+
+
+
+          if (error) {
+                    return (
+                              <div>
+                                        <p>Error: {error.message}</p>
+                              </div>
+                    );
+          }
+          if (loading) {
+                    return <p>Loading...</p>;
+          }
+          if (user) {
+                    return (
+                              <div>
+                                        <p>Signed In User: {user.email}</p>
+                              </div>
+                    );
+          }
+
           return (
                     <div>
 
@@ -14,11 +40,13 @@ const SocialLogin = () => {
                               </div>
                               <div className=''>
                                         <button
+                                                  onClick={() => signInWithGoogle()}
                                                   className='btn btn-info d-block w-100 mx-auto my-2'>
                                                   <img style={{ width: '30px' }} src={googleLogo} alt="" />
                                                   <span className='px-2'>Google Sign In</span>
                                         </button>
-                                        <button className='btn btn-info d-block w-100 mx-auto my-2'>
+                                        <button
+                                                  className='btn btn-info d-block w-100 mx-auto my-2'>
                                                   <img style={{ width: '30px' }} src={facebookLogo} alt="" />
                                                   <span className='px-2'>Facebook Sign In</span>
                                         </button>
