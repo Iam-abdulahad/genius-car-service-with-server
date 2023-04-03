@@ -8,7 +8,7 @@ const Service = ({ service }) => {
           const navigate = useNavigate();
 
           const navigateToServiceDetail = id =>{
-                    navigate(`/service/${service.id}`)
+                    navigate(`/service/${service._id}`)
           }
           return (
                     <div className='service'>
@@ -16,7 +16,7 @@ const Service = ({ service }) => {
                               <h2>{service.name}</h2>
                               <h4>${service.price}</h4>
                               <p><small>{service.description}</small></p>
-                              <Button onClick={ () =>{navigateToServiceDetail(service.id)}} variant="primary">Details</Button>
+                              <Button onClick={ () =>{navigateToServiceDetail(service._id)}} variant="primary">Details</Button>
                     </div>
           );
 };

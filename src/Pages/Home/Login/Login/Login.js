@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useSendEmailVerification, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
 import auth from '../../../../firebase.init';
 import SocialLogin from '../SocialLogin/SocialLogin';
@@ -8,6 +8,7 @@ import './Login.css'
 const Login = () => {
           const [email, setEmail] = useState('');
           const [password, setPassword] = useState('');
+          const [sendEmailVerification] = useSendEmailVerification(auth);
           const [
                     signInWithEmailAndPassword,
                     user,
@@ -53,6 +54,19 @@ const Login = () => {
                                         <button onClick={() => signInWithEmailAndPassword(email, password)} type="submit" className="form-submit">
                                                   Login
                                         </button>
+                                        <div className="form-register">
+                                                  Forget your password?{" "}
+                                                  <button
+                                                            onClick={async () => {
+                                                                      const success = await sendEmailVerification();
+                                                                      if (success) {
+                                                                                alert('Sent email');
+                                                                      }
+                                                            }}
+                                                  >
+                                                            Verify email
+                                                  </button>
+                                        </div>
                                         <SocialLogin></SocialLogin>
                                         <div className="form-register">
                                                   Don't have an account?{" "}
@@ -60,6 +74,7 @@ const Login = () => {
                                                             Please register
                                                   </Link>
                                         </div>
+   
                               </form>
                     </div>
           );
